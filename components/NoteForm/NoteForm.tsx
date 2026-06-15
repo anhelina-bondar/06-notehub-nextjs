@@ -50,8 +50,11 @@ const NoteForm = ({ onCancel }: NoteFormProps) => {
       }}
       validationSchema={validationSchema}
       onSubmit={(values, { resetForm }) => {
-        mutation.mutate(values);
-        resetForm();
+        mutation.mutate(values, {
+          onSuccess: () => {
+            resetForm();
+          },
+        });
       }}
     >
       <Form className={css.form}>
